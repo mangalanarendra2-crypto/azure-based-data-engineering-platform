@@ -1,0 +1,14 @@
+order_id,customer_id,product,category,quantity,unit_price,order_date,country
+1001,C001,Laptop,Electronics,1,55000.00,2026-09-01,India
+1002,C002,Headphones,Electronics,2,2500.50,2026-09-01,India
+1003,C003,Desk Chair,Furniture,1,7800.00,2026-09-02,USA
+1004,C001,Notebook,Stationery,10,45.00,2026-09-02,India
+1005,C004,Monitor,Electronics,2,12000.00,2026-09-03,UK
+1006,C005,Standing Desk,Furniture,1,22000.00,2026-09-03,India
+1007,C002,Pen Set,Stationery,5,120.00,2026-09-04,India
+1008,C006,Laptop,Electronics,1,58000.00,2026-09-04,USA
+1009,C003,Monitor,Electronics,1,12500.00,2026-09-05,USA
+1009,C003,Monitor,Electronics,1,12500.00,2026-09-05,USA
+1010,C007,Desk Chair,Furniture,,7800.00,2026-09-05,UK
+1011,C008,Headphones,Electronics,3,2500.50,2026-09-06,India
+1012,C004,Notebook,Stationery,20,45.00,2026-09-06,UK

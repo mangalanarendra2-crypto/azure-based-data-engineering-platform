@@ -1,0 +1,50 @@
+{
+  "name": "pl_orders_medallion",
+  "properties": {
+    "description": "Runs Databricks bronze -> silver -> gold notebooks for the orders dataset.",
+    "parameters": {
+      "storage_account": { "type": "string" },
+      "dataset": { "type": "string", "defaultValue": "sample_orders" }
+    },
+    "activities": [
+      {
+        "name": "Bronze",
+        "type": "DatabricksNotebook",
+        "linkedServiceName": { "referenceName": "ls_databricks", "type": "LinkedServiceReference" },
+        "typeProperties": {
+          "notebookPath": "/Shared/dataplatform/01_bronze",
+          "baseParameters": {
+            "storage_account": "@pipeline().parameters.storage_account",
+            "dataset": "@pipeline().parameters.dataset"
+          }
+        }
+      },
+      {
+        "name": "Silver",
+        "type": "DatabricksNotebook",
+        "dependsOn": [{ "activity": "Bronze", "dependencyConditions": ["Succeeded"] }],
+        "linkedServiceName": { "referenceName": "ls_databricks", "type": "LinkedServiceReference" },
+        "typeProperties": {
+          "notebookPath": "/Shared/dataplatform/02_silver",
+          "baseParameters": {
+            "storage_account": "@pipeline().parameters.storage_account",
+            "dataset": "@pipeline().parameters.dataset"
+          }
+        }
+      },
+      {
+        "name": "Gold",
+        "type": "DatabricksNotebook",
+        "dependsOn": [{ "activity": "Silver", "dependencyConditions": ["Succeeded"] }],
+        "linkedServiceName": { "referenceName": "ls_databricks", "type": "LinkedServiceReference" },
+        "typeProperties": {
+          "notebookPath": "/Shared/dataplatform/03_gold",
+          "baseParameters": {
+            "storage_account": "@pipeline().parameters.storage_account",
+            "dataset": "@pipeline().parameters.dataset"
+          }
+        }
+      }
+    ]
+  }
+}
